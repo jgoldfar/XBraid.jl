@@ -13,7 +13,7 @@ before_install:
     - sudo add-apt-repository ppa:staticfloat/julia-deps -y
     - sudo add-apt-repository ppa:staticfloat/${JULIAVERSION} -y
     - sudo apt-get update -qq -y
-    - sudo apt-get install libpcre3-dev gfortran julia -y
+    - sudo apt-get install libpcre3-dev gfortran libcr-dev mpich2 mpich2-doc julia -y
 script:
     - julia -e 'Pkg.init(); Pkg.clone("https://github.com/jgoldfar/XBraid.jl.git"); Pkg.build("XBraid")'
     - julia -e 'using XBraid; @assert isdefined(:XBraid); @assert typeof(XBraid) === Module'
