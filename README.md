@@ -1,5 +1,7 @@
 XBraid.jl
 =======
+[![Build Status](https://travis-ci.org/jgoldfar/XBraid.jl.svg?branch=master)](https://travis-ci.org/jgoldfar/XBraid.jl)
+[![Coverage Status](https://coveralls.io/repos/jgoldfar/XBraid.jl/badge.svg?branch=master)](https://coveralls.io/r/jgoldfar/XBraid.jl?branch=master)
 ### What is this repository for? ###
 
 * Wrapper for the [XBraid library](https://computation.llnl.gov/project/parallel-time-integration/software.php) in [Julia](http://julialang.org/), generated using [`Clang.jl`](https://github.com/ihnorton/Clang.jl). Inspiration for the generation scripts was taken from [Eglib.jl](https://github.com/ihnorton/Eglib.jl/blob/master/util/wrap.jl) (Thanks!).
