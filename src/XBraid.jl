@@ -6,4 +6,8 @@ else
     error("XBraid not properly installed. Please run Pkg.build(\"XBraid\")")
 end
 
+include("libxbraid_h.jl")
+
+include("libxbraid.jl")
+
 end # module
