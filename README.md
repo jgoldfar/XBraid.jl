@@ -1,4 +1,4 @@
-Silo.jl
+XBraid.jl
 =======
 ### What is this repository for? ###
 
@@ -8,7 +8,7 @@ Silo.jl
 
 ### How do I get set up? ###
 
-* For installation/building of the xbraid library, [`BinDeps.jl`](https://github.com/JuliaLang/BinDeps.jl) package is required.
+* For installation/building of the XBraid library, [`BinDeps.jl`](https://github.com/JuliaLang/BinDeps.jl) package is required.
 
 * To contribute, please make an issue or pull request. As a general guideline, modifications or additional low-level wrappers can be added to libxbraid.jl, and helpers (only) can be added (only) to libxbraid_h.jl. High-level wrappers go in the appropriate file(s).
 
