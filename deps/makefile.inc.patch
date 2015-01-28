@@ -1,0 +1,24 @@
+89,90c89,90
+< 		CFLAGS = -g -Wall
+< 		CXXFLAGS = -g -Wall
+---
+> 		CFLAGS = -g -fPIC -shared -Wall
+> 		CXXFLAGS = -g -fPIC -shared -Wall
+92,93c92,93
+< 		CFLAGS = -O -Wall
+< 		CXXFLAGS = -O -Wall
+---
+> 		CFLAGS = -O -fPIC -shared -Wall
+> 		CXXFLAGS = -O -fPIC -shared -Wall
+100,101c100,101
+< 		CFLAGS = -g -Wall
+< 		CXXFLAGS = -g -Wall
+---
+> 		CFLAGS = -g -fPIC -shared -Wall
+> 		CXXFLAGS = -g -fPIC -shared -Wall
+103,104c103,104
+< 		CFLAGS = -O -Wall
+< 		CXXFLAGS = -O -Wall
+---
+> 		CFLAGS = -O -fPIC -shared -Wall
+> 		CXXFLAGS = -O -fPIC -shared -Wall
