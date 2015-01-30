@@ -1,5 +1,7 @@
 XBraid.jl
 =======
+
+[![Join the chat at https://gitter.im/jgoldfar/XBraid.jl](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jgoldfar/XBraid.jl?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://travis-ci.org/jgoldfar/XBraid.jl.svg?branch=master)](https://travis-ci.org/jgoldfar/XBraid.jl)
 [![Coverage Status](https://coveralls.io/repos/jgoldfar/XBraid.jl/badge.svg?branch=master)](https://coveralls.io/r/jgoldfar/XBraid.jl?branch=master)
 ### What is this repository for? ###
