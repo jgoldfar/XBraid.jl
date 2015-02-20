@@ -9,7 +9,7 @@ xbraidfilebase = "braid-$(xbraidver)"
 provides(Sources,
          URI("https://bitbucket.org/jgoldfar/xbraid.jl/downloads/$(xbraidfilebase).tar.gz"),
          libxbraid,
-unpacked_dir="braid")
+         unpacked_dir="braid")
 #println(BinDeps.depsdir(libxbraid))
 prefix = joinpath(BinDeps.depsdir(libxbraid), "usr")
 srcdir = joinpath(BinDeps.depsdir(libxbraid), "src", "braid")
@@ -19,20 +19,20 @@ println("Installing XBraid source to ", srcdir)
 
 provides(SimpleBuild, (@build_steps begin
                          GetSources(libxbraid)
-CreateDirectory(srcdir)
-@build_steps begin
+                         CreateDirectory(srcdir)
+                         @build_steps begin
                            ChangeDirectory(srcdir)
-FileRule(joinpath(prefix, "lib", "libbraid.so"),
-                         @build_steps begin 
-`patch makefile.inc $buildfiledir/makefile.inc.patch`
-`patch Makefile $buildfiledir/Makefile.patch`
-`make clean`#MakeTargets("clean")
-`make`#MakeTargets()
-`make libbraid.so`#MakeTargets("libbraid.so")#`make libbraid.so`
-`make install prefix=$prefix`#MakeTargets("install --prefix=$prefix")
-end
-)
-end
+                           FileRule(joinpath(prefix, "lib", "libbraid.so"),
+                                    @build_steps begin
+                                      `patch makefile.inc $buildfiledir/makefile.inc.patch`
+                                      `patch Makefile $buildfiledir/Makefile.patch`
+                                      `make clean`#MakeTargets("clean")
+                                      `make`#MakeTargets()
+                                      `make libbraid.so`#MakeTargets("libbraid.so")#`make libbraid.so`
+                                      `make install prefix=$prefix`#MakeTargets("install --prefix=$prefix")
+                                    end
+                                    )
+                         end
                        end), libxbraid, os=:Unix)
 
 @BinDeps.install [:libxbraid => :libxbraid]
