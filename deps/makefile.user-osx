@@ -1,0 +1,4 @@
+CFLAGS += -fPIC -shared
+CXXFLAGS += -fPIC -shared
+
+prefix?=usr

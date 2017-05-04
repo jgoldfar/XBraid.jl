@@ -1,0 +1,10 @@
+
+libbraid.$(SONAME): $(BRAID_OBJ)
+	$(MPICC) -dynamiclib -Wl,-headerpad_max_install_names \
+    -o libbraid.$(SONAME) $(filter-out braid_F90_iface.o,$(BRAID_OBJ)) -lc
+
+install: libbraid.$(SONAME)
+	mkdir -p $(prefix)/lib
+	mkdir -p $(prefix)/include/
+	install libbraid.$(SONAME) $(prefix)/lib
+	install *.h $(prefix)/include/

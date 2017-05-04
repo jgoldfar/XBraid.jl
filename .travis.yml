@@ -1,23 +1,31 @@
-language: cpp
-compiler:
-    - clang
-notifications:
-    email: false
-env:
-    - JULIAVERSION="juliareleases"
-    - JULIAVERSION="julianightlies"
+language: julia
+sudo: required
+dist: trusty
+os:
+  - linux
+  - osx
+julia:
+  - release
+  - nightly
 matrix:
-    allow_failures:
-      - env: JULIAVERSION="julianightlies"
+  allow_failures:
+    - os: linux #TODO: Guarantee deps build on CI
+    - julia: nightly
+notifications:
+  email: false
+  slack: fit-pde:LzLEcCWinA1d9YPSsN4GnTL1
+notifications:
+  email: false
+env:
+  - MPI_IMPL=mpich
+  - MPI_IMPL=openmpi
 before_install:
-    - sudo add-apt-repository ppa:staticfloat/julia-deps -y
-    - sudo add-apt-repository ppa:staticfloat/${JULIAVERSION} -y
-    - sudo apt-get update -qq -y
-    - sudo apt-get install libpcre3-dev gfortran libcr-dev mpich2 mpich2-doc julia -y
-script:
-    - julia -e 'Pkg.init(); Pkg.clone("https://github.com/jgoldfar/XBraid.jl.git"); Pkg.build("XBraid")'
-    - julia -e 'using XBraid; @assert isdefined(:XBraid); @assert typeof(XBraid) === Module'
-    - if [ $JULIAVERSION = "juliareleases" ]; then julia --code-coverage test/runtests.jl; fi
-    - if [ $JULIAVERSION = "julianightlies" ]; then julia test/runtests.jl; fi
+  - sh ./deps/travis-install-mpi.sh $MPI_IMPL
+  - export PATH=$HOME/OpenMPI/bin:$PATH
+# uncomment the following lines to override the default test script
+#script:
+#  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+#  - julia -e 'Pkg.clone(pwd()); Pkg.build("XBraid"); Pkg.test("XBraid"; coverage=true)'
 after_success:
-    - if [ $JULIAVERSION = "juliareleases" ]; then julia -e 'cd(Pkg.dir("XBraid")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(Coveralls.process_folder())'; fi
+  # push coverage results to Codecov
+  - julia -e 'cd(Pkg.dir("XBraid")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
