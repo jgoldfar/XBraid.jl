@@ -11,13 +11,13 @@ os=`uname`
 case "$os" in
     Darwin)
         brew update
-        brew upgrade
+        brew upgrade cmake
         case "$MPI_IMPL" in
             mpich|mpich3)
-                brew install --build-from-source mpich
+                brew install mpich
                 ;;
             openmpi)
-                brew install --build-from-source openmpi
+                brew install openmpi
                 ;;
             *)
                 echo "Unknown MPI implementation: $MPI_IMPL"
