@@ -1,43 +1,55 @@
-# wrap_hypre.jl: Generate wrapping code. See Eglib.jl (thanks!)
+# wrap_xbraid.jl: Generate wrapping code.
 # This file is not an active part of the package. This is the code
-# that uses the Clang.jl package to wrap Hypre using the headers.
+# that uses the Clang.jl package to wrap XBraid using the headers.
 
-cd(dirname(@__FILE__))
-
+push!(Libdl.DL_LOAD_PATH, "/usr/local/Cellar/llvm/4.0.0_1/lib")
 using Clang.wrap_c
 
-#Clang include path for system clang: /usr/include/clang/3.4/include
+const wdir = dirname(@__FILE__)
+const pkgbasedir = joinpath(wdir, "..")
+const incpath = realpath(joinpath(pkgbasedir, "deps", "usr", "include"))
+if !isdir(incpath)
+  error("Run Pkg.build(\"XBraid\") before trying to wrap C headers.")
+end
 
-JULIAHOME = "/home/jgoldfar/Documents/work/projects/julia"
-
-clang_includes = map(x->joinpath(JULIAHOME, x),[
-                       "usr/include/clang/",
-                       "usr/include",
-                       "usr/include/llvm",
-                       "usr/include/llvm-c",
-                       ]
-                     )
-
-path = "/home/jgoldfar/Documents/work/projects/XBraid.jl/deps/usr/include"
-headerlist = ["braid_defs.h","_braid.h","braid.h","braid_status.h","braid_test.h","util.h"]
+# `outpath` specifies, where the julian wrappers would be generated.
+# If the generated .jl files are ok, they have to be copied to the "src" folder
+# overwriting the old ones
+const outpath = normpath(joinpath(pkgbasedir, "new"))
+rm(outpath, recursive = true, force = true)
+mkpath(outpath)
 
 
-headers = [joinpath(path, x) for x in headerlist]
-#@show filter(x->contains(x,".h"), readdir(path))
-#exit()
+info("Scanning XBraid headers in $incpath...")
+const XBraid_header_files = ["braid.h",]
+const XBraid_headers =[joinpath(incpath, y) for y in XBraid_header_files]
 
-push!(clang_includes, path)
-push!(clang_includes, "/usr/include/mpich")
+const clang_path = "/usr/local/Cellar/llvm/4.0.0_1/lib/clang/4.0.0/" # change to your clang location
+const includes = [
+    joinpath(clang_path, "include"),
+    incpath,
+    "/usr/local/Cellar/open-mpi/2.1.0/include/"
+]
 
-check_use_header(path) = true
+function find_outfile(s)
+    joinpath(outpath, string(first(splitext(basename(s))), ".jl"))
+end
+find_libfile(s) = "libbraid"
 
-clang_extraargs = ["-D", "__STDC_LIMIT_MACROS", "-D", "__STDC_CONSTANT_MACROS", "-v"]
-context = wrap_c.init(output_file = "libxbraid.jl",
-                      headers = headers,
-                      header_library=x->"libxbraid",
-                      clang_args = clang_extraargs,
-                      clang_includes = clang_includes,
-                      common_file = "libxbraid_h.jl",
-                      )
+const context = wrap_c.init(
+    headers = XBraid_headers,
+    common_file = joinpath(outpath, "types_and_consts.jl"),
+    clang_args = [
+        "-D", "__STDC_LIMIT_MACROS",
+        "-D", "__STDC_CONSTANT_MACROS",
+        # "-v"
+    ],
+    # clang_diagnostics = true,
+    header_library = find_libfile,
+    header_outputfile = find_outfile,
+    clang_includes = includes,
+)
 
+info("Generating .jl wrappers for XBraid in $outpath...")
 run(context)
+info("Done generating .jl wrappers for XBraid in $outpath")
