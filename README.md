@@ -11,7 +11,7 @@ XBraid.jl
 
 ### How do I get set up? ###
 
-* For installation/building of the XBraid library, [BinDeps.jl](https://github.com/JuliaLang/BinDeps.jl) package is required.
+* XBraid.jl is built against Julia v0.6+. [BinDeps.jl](https://github.com/JuliaLang/BinDeps.jl) package is required to install/build the library..
 
 * To contribute, please make an issue or pull request. As a general guideline, modifications or additional low-level wrappers can be added to `libxbraid.jl`, and helpers can be added to `libxbraid_h.jl`. High-level wrappers go in the appropriate file(s).
 
