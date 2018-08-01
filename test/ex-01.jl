@@ -112,11 +112,11 @@ function main()
     ntime  = 10
     tstart = 0.0
     tstop  = tstart + ntime/2.0
-    core = Ptr{Void}(C_NULL)
+    core = braid_Core(C_NULL)
 
     MPI.Init()
     comm = MPI.COMM_WORLD
-    rank = MPI.Comm_rank(comm) + 1
+    rank = MPI.Comm_rank(comm)
     size = MPI.Comm_size(comm)
     
     app = Ref{my_App}(_ex01_App_struct(rank))
@@ -124,6 +124,16 @@ function main()
     XBraid.Init(comm, comm, tstart, tstop, ntime, app,
     my_CStep, my_CInit, my_CClone, my_CFree, my_CSum, my_CSpatialNorm, 
     my_CAccess, my_CBufSize, my_CBufPack, my_CBufUnpack, core)
+
+    print(string(rank, ", ", core, "\n"))
+
+    #= Set some typical Braid parameters =#
+    # XBraid.SetPrintLevel(core, 1)
+    # XBraid.SetMaxLevels(core, 2)
+    # XBraid.SetAbsTol(core, 1.0e-06)
+    # XBraid.SetCFactor(core, -1, 2)
+    
+    XBraid.Destroy(core)
 
     MPI.Finalize()
 end

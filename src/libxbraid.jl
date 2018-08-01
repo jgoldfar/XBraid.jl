@@ -310,27 +310,27 @@ function PrintStats(core::braid_Core)
     ccall((:braid_PrintStats, libxbraid), braid_Int, (braid_Core,), core)
 end
 
-function SetMaxLevels(core::braid_Core, max_levels::braid_Int)
+function SetMaxLevels(core::braid_Core, max_levels::Integer)
     ccall((:braid_SetMaxLevels, libxbraid), braid_Int, (braid_Core, braid_Int), core, max_levels)
 end
 
-function SetSkip(core::braid_Core, skip::braid_Int)
+function SetSkip(core::braid_Core, skip::Integer)
     ccall((:braid_SetSkip, libxbraid), braid_Int, (braid_Core, braid_Int), core, skip)
 end
 
-function SetRefine(core::braid_Core, refine::braid_Int)
+function SetRefine(core::braid_Core, refine::Integer)
     ccall((:braid_SetRefine, libxbraid), braid_Int, (braid_Core, braid_Int), core, refine)
 end
 
-function SetMaxRefinements(core::braid_Core, max_refinements::braid_Int)
+function SetMaxRefinements(core::braid_Core, max_refinements::Integer)
     ccall((:braid_SetMaxRefinements, libxbraid), braid_Int, (braid_Core, braid_Int), core, max_refinements)
 end
 
-function SetTPointsCutoff(core::braid_Core, tpoints_cutoff::braid_Int)
+function SetTPointsCutoff(core::braid_Core, tpoints_cutoff::Integer)
     ccall((:braid_SetTPointsCutoff, libxbraid), braid_Int, (braid_Core, braid_Int), core, tpoints_cutoff)
 end
 
-function SetMinCoarse(core::braid_Core, min_coarse::braid_Int)
+function SetMinCoarse(core::braid_Core, min_coarse::Integer)
     ccall((:braid_SetMinCoarse, libxbraid), braid_Int, (braid_Core, braid_Int), core, min_coarse)
 end
 
@@ -342,15 +342,15 @@ function SetRelTol(core::braid_Core, rtol::braid_Real)
     ccall((:braid_SetRelTol, libxbraid), braid_Int, (braid_Core, braid_Real), core, rtol)
 end
 
-function SetNRelax(core::braid_Core, level::braid_Int, nrelax::braid_Int)
+function SetNRelax(core::braid_Core, level::Integer, nrelax::Integer)
     ccall((:braid_SetNRelax, libxbraid), braid_Int, (braid_Core, braid_Int, braid_Int), core, level, nrelax)
 end
 
-function SetCFactor(core::braid_Core, level::braid_Int, cfactor::braid_Int)
+function SetCFactor(core::braid_Core, level::Integer, cfactor::Integer)
     ccall((:braid_SetCFactor, libxbraid), braid_Int, (braid_Core, braid_Int, braid_Int), core, level, cfactor)
 end
 
-function SetMaxIter(core::braid_Core, max_iter::braid_Int)
+function SetMaxIter(core::braid_Core, max_iter::Integer)
     ccall((:braid_SetMaxIter, libxbraid), braid_Int, (braid_Core, braid_Int), core, max_iter)
 end
 
@@ -358,19 +358,19 @@ function SetFMG(core::braid_Core)
     ccall((:braid_SetFMG, libxbraid), braid_Int, (braid_Core,), core)
 end
 
-function SetNFMG(core::braid_Core, k::braid_Int)
+function SetNFMG(core::braid_Core, k::Integer)
     ccall((:braid_SetNFMG, libxbraid), braid_Int, (braid_Core, braid_Int), core, k)
 end
 
-function SetNFMGVcyc(core::braid_Core, nfmg_Vcyc::braid_Int)
+function SetNFMGVcyc(core::braid_Core, nfmg_Vcyc::Integer)
     ccall((:braid_SetNFMGVcyc, libxbraid), braid_Int, (braid_Core, braid_Int), core, nfmg_Vcyc)
 end
 
-function SetStorage(core::braid_Core, storage::braid_Int)
+function SetStorage(core::braid_Core, storage::Integer)
     ccall((:braid_SetStorage, libxbraid), braid_Int, (braid_Core, braid_Int), core, storage)
 end
 
-function SetTemporalNorm(core::braid_Core, tnorm::braid_Int)
+function SetTemporalNorm(core::braid_Core, tnorm::Integer)
     ccall((:braid_SetTemporalNorm, libxbraid), braid_Int, (braid_Core, braid_Int), core, tnorm)
 end
 
@@ -394,7 +394,7 @@ function SetSpatialRefine(core::braid_Core, srefine::braid_PtFcnSRefine)
     ccall((:braid_SetSpatialRefine, libxbraid), braid_Int, (braid_Core, braid_PtFcnSRefine), core, srefine)
 end
 
-function SetPrintLevel(core::braid_Core, print_level::braid_Int)
+function SetPrintLevel(core::braid_Core, print_level::Integer)
     ccall((:braid_SetPrintLevel, libxbraid), braid_Int, (braid_Core, braid_Int), core, print_level)
 end
 
@@ -406,7 +406,7 @@ function SetDefaultPrintFile(core::braid_Core)
     ccall((:braid_SetDefaultPrintFile, libxbraid), braid_Int, (braid_Core,), core)
 end
 
-function SetAccessLevel(core::braid_Core, access_level::braid_Int)
+function SetAccessLevel(core::braid_Core, access_level::Integer)
     ccall((:braid_SetAccessLevel, libxbraid), braid_Int, (braid_Core, braid_Int), core, access_level)
 end
 
@@ -434,6 +434,6 @@ function GetSpatialAccuracy(status::braid_StepStatus, loose_tol::braid_Real, tig
     ccall((:braid_GetSpatialAccuracy, libxbraid), braid_Int, (braid_StepStatus, braid_Real, braid_Real, Ptr{braid_Real}), status, loose_tol, tight_tol, tol_ptr)
 end
 
-function SetSeqSoln(core::braid_Core, seq_soln::braid_Int)
+function SetSeqSoln(core::braid_Core, seq_soln::Integer)
     ccall((:braid_SetSeqSoln, libxbraid), braid_Int, (braid_Core, braid_Int), core, seq_soln)
 end
