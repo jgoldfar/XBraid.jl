@@ -6,15 +6,15 @@ function arc4random()
 end
 
 function arc4random_addrandom(arg1, arg2::Cint)
-    ccall((:arc4random_addrandom, libxbraid), Void, (Ptr{Cuchar}, Cint), arg1, arg2)
+    ccall((:arc4random_addrandom, libxbraid), Nothing, (Ptr{Cuchar}, Cint), arg1, arg2)
 end
 
 function arc4random_buf(__buf, __nbytes::Csize_t)
-    ccall((:arc4random_buf, libxbraid), Void, (Ptr{Void}, Csize_t), __buf, __nbytes)
+    ccall((:arc4random_buf, libxbraid), Nothing, (Ptr{Nothing}, Csize_t), __buf, __nbytes)
 end
 
 function arc4random_stir()
-    ccall((:arc4random_stir, libxbraid), Void, ())
+    ccall((:arc4random_stir, libxbraid), Nothing, ())
 end
 
 function arc4random_uniform(__upper_bound::UInt32)
@@ -22,7 +22,7 @@ function arc4random_uniform(__upper_bound::UInt32)
 end
 
 function _braid_ErrorHandler(filename, line::braid_Int, ierr::braid_Int, msg)
-    ccall((:_braid_ErrorHandler, libxbraid), Void, (Cstring, braid_Int, braid_Int, Cstring), filename, line, ierr, msg)
+    ccall((:_braid_ErrorHandler, libxbraid), Nothing, (Cstring, braid_Int, braid_Int, Cstring), filename, line, ierr, msg)
 end
 
 function StatusGetT(status::braid_Status, t_ptr)
@@ -293,8 +293,8 @@ function Init(comm_world::MPI.Comm, comm::MPI.Comm, tstart::braid_Real, tstop::b
     ccall(
         (:braid_Init, libxbraid),
         braid_Int, 
-        (Ptr{Cint}, Ptr{Cint}, braid_Real, braid_Real, braid_Int, braid_App, braid_PtFcnStep, braid_PtFcnInit, braid_PtFcnClone, braid_PtFcnFree, braid_PtFcnSum, braid_PtFcnSpatialNorm, braid_PtFcnAccess, braid_PtFcnBufSize, braid_PtFcnBufPack, braid_PtFcnBufUnpack, Ptr{braid_Core}),
-        &comm_world.val, &comm.val, tstart, tstop, ntime, app, step, init, clone, free, sum, spatialnorm, access, bufsize, bufpack, bufunpack, &core
+        (Ref{Cint}, Ref{Cint}, braid_Real, braid_Real, braid_Int, braid_App, braid_PtFcnStep, braid_PtFcnInit, braid_PtFcnClone, braid_PtFcnFree, braid_PtFcnSum, braid_PtFcnSpatialNorm, braid_PtFcnAccess, braid_PtFcnBufSize, braid_PtFcnBufPack, braid_PtFcnBufUnpack, Ref{braid_Core}),
+        comm_world.val, comm.val, tstart, tstop, ntime, app, step, init, clone, free, sum, spatialnorm, access, bufsize, bufpack, bufunpack, core
         )
 end
 
@@ -411,7 +411,7 @@ function SetAccessLevel(core::braid_Core, access_level::Integer)
 end
 
 function SplitCommworld(comm_world::MPI.Comm, px::braid_Int, comm_x::MPI.Comm, comm_t::MPI.Comm)
-    ccall((:braid_SplitCommworld, libxbraid), braid_Int, (Ptr{Void}, braid_Int, Ptr{Void}, Ptr{Void}), &comm_world.val, px, &comm_x.val, &comm_t.val)
+    ccall((:braid_SplitCommworld, libxbraid), braid_Int, (Ref{Nothing}, braid_Int, Ref{Nothing}, Ref{Nothing}), comm_world.val, px, comm_x.val, comm_t.val)
 end
 
 function SetShell(core::braid_Core, sinit::braid_PtFcnSInit, sclone::braid_PtFcnSClone, sfree::braid_PtFcnSFree)

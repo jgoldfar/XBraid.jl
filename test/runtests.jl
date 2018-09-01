@@ -19,7 +19,11 @@ function calc_nprocs()
 end
 
 const nprocs = calc_nprocs()
-const exename = joinpath(JULIA_HOME, Base.julia_exename())
+@static if VERSION >= v"0.7-"
+    const exename = joinpath(Sys.BINDIR, Base.julia_exename())
+else
+    const exename = joinpath(JULIA_HOME, Base.julia_exename())
+end
 
 const testdir = dirname(@__FILE__)
 istest(f) = endswith(f, ".jl") && f != "runtests.jl"

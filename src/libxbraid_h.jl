@@ -1,6 +1,6 @@
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-using Compat
+using Compat: Nothing
 
 # Skipping MacroDefinition: braid_isnan ( a ) ( a != a )
 # Skipping MacroDefinition: ACCESSOR_HEADER_GET1 ( stype , param , vtype1 ) braid_Int braid_ ## stype ## StatusGet ## param ( braid_ ## stype ## Status s , braid_ ## vtype1 * v1 ) ;
@@ -25,35 +25,35 @@ const braid_ERROR_ARG = 4
 const braid_Int = Cint
 const braid_Real = Cdouble
 
-const braid_Status = Ptr{Void}
+const braid_Status = Ptr{Nothing}
 
-const braid_AccessStatus = Ptr{Void}
+const braid_AccessStatus = Ptr{Nothing}
 
-const braid_StepStatus = Ptr{Void}
+const braid_StepStatus = Ptr{Nothing}
 
-const braid_CoarsenRefStatus = Ptr{Void}
+const braid_CoarsenRefStatus = Ptr{Nothing}
 
-const braid_BufferStatus = Ptr{Void}
+const braid_BufferStatus = Ptr{Nothing}
 
-const braid_App = Ptr{Void}
+const braid_App = Ptr{Nothing}
 
-const braid_Vector = Ptr{Void}
-const braid_PtFcnStep = Ptr{Void}
-const braid_PtFcnInit = Ptr{Void}
-const braid_PtFcnClone = Ptr{Void}
-const braid_PtFcnFree = Ptr{Void}
-const braid_PtFcnSum = Ptr{Void}
-const braid_PtFcnSpatialNorm = Ptr{Void}
-const braid_PtFcnAccess = Ptr{Void}
-const braid_PtFcnBufSize = Ptr{Void}
-const braid_PtFcnBufPack = Ptr{Void}
-const braid_PtFcnBufUnpack = Ptr{Void}
-const braid_PtFcnResidual = Ptr{Void}
-const braid_PtFcnSCoarsen = Ptr{Void}
-const braid_PtFcnSRefine = Ptr{Void}
-const braid_PtFcnSInit = Ptr{Void}
-const braid_PtFcnSClone = Ptr{Void}
-const braid_PtFcnSFree = Ptr{Void}
-const braid_PtFcnTimeGrid = Ptr{Void}
+const braid_Vector = Ptr{Nothing}
+const braid_PtFcnStep = Ptr{Nothing}
+const braid_PtFcnInit = Ptr{Nothing}
+const braid_PtFcnClone = Ptr{Nothing}
+const braid_PtFcnFree = Ptr{Nothing}
+const braid_PtFcnSum = Ptr{Nothing}
+const braid_PtFcnSpatialNorm = Ptr{Nothing}
+const braid_PtFcnAccess = Ptr{Nothing}
+const braid_PtFcnBufSize = Ptr{Nothing}
+const braid_PtFcnBufPack = Ptr{Nothing}
+const braid_PtFcnBufUnpack = Ptr{Nothing}
+const braid_PtFcnResidual = Ptr{Nothing}
+const braid_PtFcnSCoarsen = Ptr{Nothing}
+const braid_PtFcnSRefine = Ptr{Nothing}
+const braid_PtFcnSInit = Ptr{Nothing}
+const braid_PtFcnSClone = Ptr{Nothing}
+const braid_PtFcnSFree = Ptr{Nothing}
+const braid_PtFcnTimeGrid = Ptr{Nothing}
 
-const braid_Core = Ptr{Void}
+const braid_Core = Ptr{Nothing}
